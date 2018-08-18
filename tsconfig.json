@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "allowJs": false,
+    "moduleResolution": "node",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "pretty": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "declaration": true,
+    "outDir": "lib"
+  }
+}
