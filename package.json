@@ -1,6 +1,6 @@
 {
   "name": "react-breadcrumbs-context",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Flexible, router agnostic breadcrumbs implemented using React's context API.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
