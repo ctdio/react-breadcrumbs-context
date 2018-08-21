@@ -1,5 +1,8 @@
 # react-breadcrumbs-context
 
+[![Build Status](https://travis-ci.org/charlieduong94/react-breadcrumbs-context.svg?branch=master)](https://travis-ci.org/charlieduong94/react-breadcrumbs-context)
+[![Coverage Status](https://coveralls.io/repos/github/charlieduong94/react-breadcrumbs-context/badge.svg?branch=master)](https://coveralls.io/github/charlieduong94/react-breadcrumbs-context?branch=master)
+
 A lightweight, router agnostic implementation of breadcrumbs using the
 [Context API](https://reactjs.org/docs/context.html) introduced in
 React 16. Unlike other breadcrumb implementations, this module

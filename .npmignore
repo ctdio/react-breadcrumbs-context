@@ -1,4 +1,7 @@
 src/
+coverage/
+.travis.yml
 *.config.js
 tsconfig.json
+tsconfig.dist.json
 tslint.json
