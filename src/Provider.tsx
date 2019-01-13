@@ -27,17 +27,20 @@ class BreadcrumbsProvider extends Component<Props, State> {
     }))
   }
 
+  findCrumb = (crumb: Crumb, crumbs: Crumb[]): number | undefined => {
+    for (let i = 0; i < crumbs.length; i++) {
+      const { title, path } = crumbs[i];
+      if (crumb.title === title && crumb.path === path) {
+        return i;
+      }
+    }
+
+    return undefined;
+  }
+
   removeCrumb = (crumbToRemove: Crumb) => {
     this.setState(({ crumbs: prevCrumbs }) => {
-      let crumbIndex: number | undefined
-
-      for (let i = 0; i < prevCrumbs.length; i++) {
-        const { title, path } = prevCrumbs[i]
-        if (crumbToRemove.title === title && crumbToRemove.path === path) {
-          crumbIndex = i
-          break
-        }
-      }
+      const crumbIndex = this.findCrumb(crumbToRemove, prevCrumbs);
 
       let crumbs
 
@@ -52,6 +55,23 @@ class BreadcrumbsProvider extends Component<Props, State> {
     })
   }
 
+  replaceCrumb = (crumbToReplace: Crumb, crumbReplacement: Crumb) => {
+    this.setState(({ crumbs: prevCrumbs }) => {
+      const crumbIndex = this.findCrumb(crumbToReplace, prevCrumbs);
+
+      let crumbs
+
+      if (crumbIndex !== undefined) {
+        crumbs = [...prevCrumbs];
+        crumbs.splice(crumbIndex, 1, crumbReplacement);
+      } else {
+        crumbs = prevCrumbs;
+      }
+
+      return { crumbs };
+    })
+  }
+
   render() {
     const { crumbs } = this.state
     const { children } = this.props
@@ -59,7 +79,8 @@ class BreadcrumbsProvider extends Component<Props, State> {
     const context = {
       crumbs,
       addCrumb: this.addCrumb,
-      removeCrumb: this.removeCrumb
+      removeCrumb: this.removeCrumb,
+      replaceCrumb: this.replaceCrumb
     }
 
     return <Provider value={context}>{children}</Provider>
