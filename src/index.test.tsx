@@ -30,6 +30,43 @@ class Dismounter extends Component {
   }
 }
 
+const TestComponentWithBreadcrumbFromProps = withBreadcrumb<TestComponentProps>(
+  ({ str }) => ({
+    title: str,
+    path: str
+  })
+)(TestComponentWithProps)
+
+interface ToggleComponentProps {
+  str1: string
+  str2: string
+}
+
+class ToggleComponent extends Component<
+  ToggleComponentProps,
+  { toggled: boolean }
+> {
+  state = {
+    toggled: false
+  }
+
+  onClick = () => {
+    this.setState(({ toggled }) => {
+      return { toggled: !toggled }
+    })
+  }
+
+  render() {
+    return (
+      <div onClick={this.onClick} className="toggle">
+        <TestComponentWithBreadcrumbFromProps
+          str={this.state.toggled ? this.props.str2 : this.props.str1}
+        />
+      </div>
+    )
+  }
+}
+
 test('should register breadcrumbs with addCrumb', () => {
   const testCrumb: Crumb = {
     title: uuidV4(),
@@ -214,20 +251,14 @@ test('should allow for breadcrumb data to be derived from props', async () => {
 })
 
 test('should allow for props to be derived from wrapped component', async () => {
-  const str = uuidV4()
-
-  const TestComponentWithBreadcrumb = withBreadcrumb<TestComponentProps>(
-    ({ str }) => ({
-      title: str,
-      path: str
-    })
-  )(TestComponentWithProps)
+  const str1 = uuidV4()
+  const str2 = uuidV4()
 
   let trackedCrumbs
 
-  mount(
+  const wrapper = mount(
     <BreadcrumbsProvider>
-      <TestComponentWithBreadcrumb str={str} />
+      <ToggleComponent str1={str1} str2={str2} />
       <BreadcrumbsConsumer>
         {({ crumbs }) => {
           trackedCrumbs = crumbs
@@ -237,5 +268,12 @@ test('should allow for props to be derived from wrapped component', async () => 
     </BreadcrumbsProvider>
   )
 
-  expect(trackedCrumbs).toEqual([{ title: str, path: str }])
+  expect(trackedCrumbs).toEqual([{ title: str1, path: str1 }])
+
+  wrapper.find('.toggle').simulate('click')
+
+  await new Promise(resolve => setImmediate(resolve))
+  wrapper.update()
+
+  expect(trackedCrumbs).toEqual([{ title: str2, path: str2 }])
 })
