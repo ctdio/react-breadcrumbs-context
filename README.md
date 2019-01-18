@@ -29,7 +29,7 @@ import {
   BreadcrumbsProvider,
   BreadcrumbsConsumer,
   withBreadcrumb
-} from 'react-breadcrumb-context'
+} from 'react-breadcrumbs-context'
 ```
 
 Components rendered using the `withBreadcrumb` higher order component
@@ -53,8 +53,8 @@ const App = () => (
   <BreadcrumbsProvider>
     <BreadcrumbsConsumer>
       {({ crumbs }) => {
-        console.log('crumbs') // will output [ { title: 'Page', path: '/' } ]
-        return <h1> First crumb title is {crumbs[0]} </h1>
+        console.log(crumbs) // will output [ { title: 'Page', path: '/' } ]
+        return <h1> First crumb title is {crumbs[0].title} </h1>
       }}
     </BreadcrumbsConsumer>
     <MyPage />
@@ -68,5 +68,5 @@ This module exposes Typescript typings. If needed, you can get the
 `Crumb` type from this module.
 
 ```typescript
-import { Crumb } from 'react-breadcrumb-context'
+import { Crumb } from 'react-breadcrumbs-context'
 ```
