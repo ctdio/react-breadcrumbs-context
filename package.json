@@ -50,7 +50,7 @@
     "lint-staged": "^8.1.4",
     "prettier": "^1.14.2",
     "react": "^16.8.4",
-    "react-dom": "^16.4.2",
+    "react-dom": "^16.8.4",
     "ts-jest": "^24.0.0",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.14.0",
