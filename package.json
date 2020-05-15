@@ -51,7 +51,7 @@
     "prettier": "^1.14.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "ts-jest": "^25.1.0",
+    "ts-jest": "^26.0.0",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.14.0",
     "tslint-config-standard": "^8.0.1",
